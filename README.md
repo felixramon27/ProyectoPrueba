@@ -13,7 +13,7 @@ ProyectoPrueba es una aplicación web fullstack que permite la gestión de usuar
 
 ## Estructura del proyecto
 
-```bash
+```text
 ProyectoPrueba/
 ├── Backend/
 │   ├── server.js
@@ -28,12 +28,12 @@ ProyectoPrueba/
 
 ## Tecnologías utilizadas
 
-### Backend
+### Tecnologías Backend
 
 - Node.js
 - Express
 
-### Frontend
+### Tecnologías Frontend
 
 - React
 - Vite
@@ -76,11 +76,11 @@ La aplicación estará disponible en `http://localhost:5173`.
 
 ## Scripts disponibles
 
-### Backend
+### Scripts Backend
 
 - `npm start`: Inicia el servidor Express.
 
-### Frontend
+### Scripts Frontend
 
 - `npm run dev`: Inicia el servidor de desarrollo de Vite.
 - `npm run build`: Genera la versión de producción.
