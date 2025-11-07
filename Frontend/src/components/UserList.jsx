@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { deleteUser } from '../services/userServices';
-import toast from 'react-hot-toast'; 
+import toast from 'react-hot-toast';
 
 const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, onView }) => {
   const [filters, setFilters] = useState({
@@ -25,6 +25,7 @@ const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, 
   const handleApplyFilters = () => {
     onReload(filters);
     toast.success('Filtros aplicados correctamente');
+
   };
 
   // Abrir modal de confirmación
@@ -72,31 +73,31 @@ const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, 
   const getPageNumbers = () => {
     const currentPage = parseInt(paginationInfo.page) || 1;
     const totalPages = parseInt(paginationInfo.totalPages) || 1;
-    
+
     if (totalPages <= 1) return [1];
-    
+
     const delta = 2;
     const range = [];
     const rangeWithDots = [];
-    
+
     for (let i = Math.max(2, currentPage - delta); i <= Math.min(totalPages - 1, currentPage + delta); i++) {
       range.push(i);
     }
-    
+
     if (currentPage - delta > 2) {
       rangeWithDots.push(1, '...');
     } else {
       rangeWithDots.push(1);
     }
-    
+
     rangeWithDots.push(...range);
-    
+
     if (currentPage + delta < totalPages - 1) {
       rangeWithDots.push('...', totalPages);
     } else if (totalPages > 1) {
       rangeWithDots.push(totalPages);
     }
-    
+
     return rangeWithDots;
   };
 
@@ -109,7 +110,7 @@ const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, 
             Gestión de Usuarios
           </h2>
           <p className="text-gray-600 mt-1">
-            {paginationInfo.total > 0 
+            {paginationInfo.total > 0
               ? `Mostrando ${((filters.page - 1) * filters.limit) + 1}-${Math.min(filters.page * filters.limit, paginationInfo.total)} de ${paginationInfo.total} usuarios`
               : 'No hay usuarios registrados'
             }
@@ -136,7 +137,7 @@ const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, 
           </svg>
           Filtros y Ordenamiento
         </h3>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -244,8 +245,8 @@ const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, 
               </thead>
               <tbody className="bg-white divide-y divide-gray-100">
                 {users.map((user, index) => (
-                  <tr 
-                    key={user.id} 
+                  <tr
+                    key={user.id}
                     className="hover:bg-blue-50 transition-all duration-200 transform hover:scale-[1.002]"
                   >
                     <td className="px-6 py-4">
@@ -263,10 +264,10 @@ const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, 
                     </td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex px-3 py-1 text-xs font-semibold rounded-full 
-                        ${user.categoria === 'superAmigos' ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white' : 
+                        ${user.categoria === 'superAmigos' ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white' :
                           user.categoria === 'amigo' ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white' :
-                          user.categoria === 'compañero' ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white' :
-                          'bg-gradient-to-r from-red-500 to-orange-500 text-white'}`}>
+                            user.categoria === 'compañero' ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white' :
+                              'bg-gradient-to-r from-red-500 to-orange-500 text-white'}`}>
                         {user.categoria}
                       </span>
                     </td>
@@ -324,11 +325,10 @@ const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, 
                   <button
                     onClick={() => handlePageChange(paginationInfo.page - 1)}
                     disabled={paginationInfo.page === 1}
-                    className={`px-3 py-2 text-sm font-medium rounded-lg ${
-                      paginationInfo.page === 1 
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                    className={`px-3 py-2 text-sm font-medium rounded-lg ${paginationInfo.page === 1
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                         : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                    }`}
+                      }`}
                   >
                     ← Anterior
                   </button>
@@ -338,13 +338,12 @@ const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, 
                     <button
                       key={index}
                       onClick={() => typeof page === 'number' ? handlePageChange(page) : null}
-                      className={`px-3 py-2 text-sm font-medium rounded-lg min-w-[40px] ${
-                        page === paginationInfo.page
+                      className={`px-3 py-2 text-sm font-medium rounded-lg min-w-[40px] ${page === paginationInfo.page
                           ? 'bg-blue-500 text-white border border-blue-500'
                           : typeof page === 'number'
-                          ? 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                          : 'bg-white text-gray-400 cursor-default'
-                      }`}
+                            ? 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                            : 'bg-white text-gray-400 cursor-default'
+                        }`}
                       disabled={typeof page !== 'number'}
                     >
                       {page}
@@ -355,11 +354,10 @@ const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, 
                   <button
                     onClick={() => handlePageChange(paginationInfo.page + 1)}
                     disabled={paginationInfo.page === paginationInfo.totalPages}
-                    className={`px-3 py-2 text-sm font-medium rounded-lg ${
-                      paginationInfo.page === paginationInfo.totalPages 
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                    className={`px-3 py-2 text-sm font-medium rounded-lg ${paginationInfo.page === paginationInfo.totalPages
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                         : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                    }`}
+                      }`}
                   >
                     Siguiente →
                   </button>
@@ -408,7 +406,7 @@ const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, 
                   <p className="text-gray-600 text-sm">{deleteModal.user?.email}</p>
                 </div>
               </div>
-              
+
               <div className="bg-red-50 border border-red-200 rounded-xl p-4">
                 <div className="flex items-start">
                   <svg className="w-5 h-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

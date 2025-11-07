@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createUser, updateUser } from '../services/userServices';
 import toast from 'react-hot-toast';
 
@@ -11,10 +11,22 @@ const UserForm = ({ user, onSave, onCancel }) => {
     year: '',
     categoria: ''
   });
+  
+  const nombreInputRef = useRef(null);
+
+  // Seleccionar texto al hacer focus/click
+  const handleNombreFocus = () => {
+    if (nombreInputRef.current) {
+      nombreInputRef.current.select();
+    }
+  };
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (nombreInputRef.current) {
+      nombreInputRef.current.focus();
+    }
     if (user) {
       const birthDate = new Date(user.fechaDeNacimiento);
       setFormData({
@@ -170,6 +182,9 @@ const UserForm = ({ user, onSave, onCancel }) => {
               name="nombre"
               value={formData.nombre}
               onChange={handleChange}
+              ref={nombreInputRef}
+              onFocus={handleNombreFocus}
+              onClick={handleNombreFocus}
               className={`w-full border-2 rounded-xl px-4 py-4 focus:outline-none transition-all duration-200 text-lg ${
                 errors.nombre 
                   ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-200 bg-red-50' 
