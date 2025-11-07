@@ -129,9 +129,15 @@ const UserDetail = ({ user, onEdit, onBack }) => {
                   </div>
                   <div className="text-right">
                     <p className="text-gray-600 mb-2">Estado</p>
-                    <span className="inline-flex px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
-                      Activo
-                    </span>
+                    {user.categoria === 'bloqueados' ? (
+                      <span className="inline-flex px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">
+                        Bloqueado
+                      </span>
+                    ) : (
+                      <span className="inline-flex px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                        Activo
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
