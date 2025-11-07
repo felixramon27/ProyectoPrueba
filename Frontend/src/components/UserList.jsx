@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { deleteUser } from '../services/userServices';
+import toast from 'react-hot-toast'; 
 
 const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, onView }) => {
   const [filters, setFilters] = useState({
@@ -23,6 +24,7 @@ const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, 
 
   const handleApplyFilters = () => {
     onReload(filters);
+    toast.success('Filtros aplicados correctamente');
   };
 
   // Abrir modal de confirmación
@@ -46,11 +48,12 @@ const UserList = ({ users, loading, paginationInfo, onReload, onCreate, onEdit, 
     if (deleteModal.user) {
       try {
         await deleteUser(deleteModal.user.id);
+        toast.success('Usuario eliminado exitosamente');
         closeDeleteModal();
         // Recargar manteniendo los filtros actuales
         onReload(filters);
       } catch (error) {
-        alert('Error eliminando usuario: ' + error.message);
+        toast.error('Error eliminando usuario: ' + error.message);
         closeDeleteModal();
       }
     }

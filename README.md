@@ -11,6 +11,19 @@ ProyectoPrueba es una aplicación web fullstack que permite la gestión de usuar
 - Interfaz moderna y responsiva.
 - Comunicación entre frontend y backend mediante API REST.
 
+## 🎉 Notificaciones (Toasts)
+
+El sistema incluye notificaciones toast elegantes para:
+
+- ✅ Creación exitosa de usuarios
+- ✅ Actualización exitosa de usuarios
+- ✅ Eliminación exitosa de usuarios
+- ✅ Aplicación de filtros
+- ❌ Errores de validación
+- ❌ Errores de servidor
+
+Las notificaciones utilizan `react-hot-toast` y están completamente integradas con el diseño de la aplicación.
+
 ## Estructura del proyecto
 
 ```text

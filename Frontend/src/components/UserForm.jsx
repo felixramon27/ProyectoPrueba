@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createUser, updateUser } from '../services/userServices';
+import toast from 'react-hot-toast';
 
 const UserForm = ({ user, onSave, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -105,12 +106,15 @@ const UserForm = ({ user, onSave, onCancel }) => {
 
       if (user) {
         await updateUser(user.id, userData);
+        toast.success('Usuario actualizado exitosamente');
       } else {
         await createUser(userData);
+        toast.success('Usuario creado exitosamente');
       }
       
       onSave();
     } catch (error) {
+      toast.error(error.message);
       setErrors({ submit: error.message });
     } finally {
       setLoading(false);

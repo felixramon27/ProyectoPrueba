@@ -3,6 +3,7 @@ import UserList from './components/UserList';
 import UserForm from './components/UserForm';
 import UserDetail from './components/UserDetail';
 import { getUsers } from './services/userServices';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [currentView, setCurrentView] = useState('list');
@@ -67,6 +68,53 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      {/* Toaster con estilos personalizados */}
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          className: 'font-sans',
+          style: {
+            background: '#ffffff',
+            color: '#1f2937',
+            border: '1px solid #e5e7eb',
+            borderRadius: '12px',
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+          },
+          success: {
+            duration: 3000,
+            iconTheme: {
+              primary: '#10b981',
+              secondary: '#ffffff',
+            },
+            style: {
+              background: '#f0fdf4',
+              color: '#065f46',
+              border: '1px solid #a7f3d0',
+            },
+          },
+          error: {
+            duration: 5000,
+            iconTheme: {
+              primary: '#ef4444',
+              secondary: '#ffffff',
+            },
+            style: {
+              background: '#fef2f2',
+              color: '#991b1b',
+              border: '1px solid #fecaca',
+            },
+          },
+          loading: {
+            style: {
+              background: '#f3f4f6',
+              color: '#374151',
+              border: '1px solid #d1d5db',
+            },
+          },
+        }}
+      />
+
       <div className="container mx-auto px-4 py-8">
         <header className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl shadow-lg mb-4">
